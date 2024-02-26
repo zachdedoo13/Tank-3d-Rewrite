@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3nivv52e0guv"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kq3e0"]
+noise_type = 0
+frequency = 0.1066
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4vvgb"]
+width = 4000
+height = 4000
+noise = SubResource("FastNoiseLite_kq3e0")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ryjkt"]
+albedo_color = Color(0.329412, 0.0784314, 0.592157, 1)
+albedo_texture = SubResource("NoiseTexture2D_4vvgb")
+
+[node name="Floor" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+size = Vector3(100, 0, 100)
+material = SubResource("StandardMaterial3D_ryjkt")
