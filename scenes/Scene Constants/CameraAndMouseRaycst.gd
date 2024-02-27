@@ -5,6 +5,8 @@ var ray_target = Vector3()
 
 func _physics_process(delta):
 	
+	$Label.text = str(Engine.get_frames_per_second())
+	
 	var space_state = get_world_3d().direct_space_state
 	
 	var mouse = get_viewport().get_mouse_position()

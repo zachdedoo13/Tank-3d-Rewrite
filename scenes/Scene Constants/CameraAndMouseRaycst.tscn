@@ -18,3 +18,9 @@ layers = 0
 use_collision = true
 collision_mask = 0
 size = Vector3(1000, 0, 1000)
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "test
+"
