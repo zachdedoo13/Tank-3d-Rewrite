@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://1ethxxv7qngi"]
+
+[ext_resource type="Script" path="res://entitys/Enemys/TurrentTest.gd" id="1_va08v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g4von"]
+albedo_color = Color(0, 0, 0, 1)
+
+[node name="TurrentTest" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_va08v")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+size = Vector3(0.75, 0.5, 0.75)
+
+[node name="Turrent" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38, -0.428523)
+size = Vector3(0.25, 0.25, 1)
+material = SubResource("StandardMaterial3D_g4von")

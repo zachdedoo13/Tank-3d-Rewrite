@@ -19,6 +19,7 @@ config/icon="res://A Requirements/assets/icon.svg"
 
 SignalManager="*res://A Requirements/Preload/SignalManager.gd"
 Draw3d="*res://A Requirements/Preload/Draw3D.gd"
+RayTool="*res://A Requirements/Preload/RayTool.gd"
 
 [display]
 
