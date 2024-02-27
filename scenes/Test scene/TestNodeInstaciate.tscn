@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dptii0fvk0wb0"]
+
+[ext_resource type="Script" path="res://scenes/Test scene/TestNodeInstaciate.gd" id="1_lsp58"]
+
+[node name="TestNodeInstaciate" type="Node3D"]
+script = ExtResource("1_lsp58")

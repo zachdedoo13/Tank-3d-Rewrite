@@ -1,9 +1,14 @@
 extends Node3D
 
 var debug = []
+var test_node = preload("res://entitys/Player/BacicBullet.tscn")
 
 func _ready():
 	SignalManager.MousePos.connect(get_mouse_pos)
+	
+	var instant = test_node.instantiate()
+	instant.text = "test"
+	add_child(instant)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
