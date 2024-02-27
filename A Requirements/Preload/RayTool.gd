@@ -37,4 +37,10 @@ func check_direction(position:Vector3, direction:float, draw=true, collision_mas
 		
 	return ret
 
+func check_position(position:Vector3, draw=true, collision_mask=2) -> Array:
+	var ret = []
+	return ret
 
+func check_2_positions(pos1:Vector3, pos2:Vector3, draw=true, collision_mask=2) -> Array:
+	var ret = []
+	return ret
