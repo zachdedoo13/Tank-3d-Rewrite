@@ -101,5 +101,4 @@ func check_direction_bounce(position:Vector3, direction:float, draw=true, collis
 	
 	return ret
 
-
-
+# sup
