@@ -1,20 +1,41 @@
-[gd_scene load_steps=3 format=3 uid="uid://byoleqjytixsb"]
+[gd_scene load_steps=6 format=3 uid="uid://byoleqjytixsb"]
 
 [ext_resource type="ArrayMesh" uid="uid://uk6f71lbi1ke" path="res://A Requirements/assets/Tank.obj" id="1_7iigl"]
+[ext_resource type="Script" path="res://entitys/Player/CharacterBody3D.gd" id="1_nqxft"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pn2uo"]
+albedo_color = Color(1, 1, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kw2ko"]
 size = Vector3(1, 1.87183, 1.53999)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c7yjx"]
+albedo_color = Color(1, 0, 1, 1)
+rim_enabled = true
 
 [node name="Player" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("1_nqxft")
+speed = 10
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
-transform = Transform3D(0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.107, 0, 0, 0)
+transform = Transform3D(0.22, 0, 0, 0, 0.06, 0, 0, 0, 0.107, 0, -1, 0)
 mesh = ExtResource("1_7iigl")
+surface_material_override/0 = SubResource("StandardMaterial3D_pn2uo")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.93811, -0.00828934)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.06189, -0.00828934)
 shape = SubResource("BoxShape3D_kw2ko")
+
+[node name="barrel" type="CSGBox3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00921631, 0.110961, 0.0123901)
+size = Vector3(0.709106, 0.387207, 0.597046)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CharacterBody3D/barrel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.041626, 0.0141809, -0.644531)
+size = Vector3(0.304443, 0.3573, 2.28906)
+material = SubResource("StandardMaterial3D_c7yjx")
