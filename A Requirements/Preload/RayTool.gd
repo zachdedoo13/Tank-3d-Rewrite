@@ -43,7 +43,6 @@ func clear_check_direction(ret:Array, on_screen=1) -> Array:
 		ret.remove_at(0)
 	return ret
 
-
 func check_direction_bounce(position:Vector3, direction:float, draw=true, collision_mask=2) -> Array:
 	var ret = [false, false, false, false, false, false, false, false]
 	
@@ -98,6 +97,7 @@ func check_direction_bounce(position:Vector3, direction:float, draw=true, collis
 	
 	raycast.queue_free()
 	bounceRaycast.queue_free()
+	
 	
 	return ret
 

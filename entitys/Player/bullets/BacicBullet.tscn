@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://crpgkut3fdwo6"]
 
-[ext_resource type="Script" path="res://entitys/Player/BacicBullet.gd" id="1_yp658"]
+[ext_resource type="Script" path="res://entitys/Player/bullets/BacicBullet.gd" id="1_yp658"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rsspl"]
 
