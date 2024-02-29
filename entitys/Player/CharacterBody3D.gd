@@ -1,12 +1,16 @@
 extends CharacterBody3D
 
 @export var speed : int
+@export var bullet_scene : PackedScene
 
 var clear = []
 var mouse_pos = Vector3(0,0,0)
 
 func _ready():
 	SignalManager.MousePos.connect(get_mouse_pos)
+	
+
+
 
 func get_mouse_pos(pos):
 	mouse_pos = Vector3(pos.x, $barrel.global_position.y, pos.z)
@@ -19,6 +23,8 @@ func move_turrent():
 func _physics_process(delta):
 	if Input.is_anything_pressed():
 		movement(delta)
+		if Input.is_action_just_pressed("ui_accept"):
+			shoot_bullet()
 	move_turrent()
 
 func movement(delta):
@@ -33,3 +39,8 @@ func rotate_the_tank(direction):
 	direction = Vector2(-direction.y, -direction.x)
 	rotation.y = direction.angle()
 
+func shoot_bullet():
+	var bullet = bullet_scene.instantiate()
+	bullet.set_veriables(position, rotation.y, true, 20)
+	owner.add_child(bullet)
+	

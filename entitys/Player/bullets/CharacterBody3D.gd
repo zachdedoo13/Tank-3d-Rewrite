@@ -1,19 +1,6 @@
 extends CharacterBody3D
 
-# placeholder
-var bounce = null
-var speed = null
-var dir = null
-
-func set_veriables(pos, direc, boing, spd):
-	position = pos
-	speed = spd
-	dir = Vector2.from_angle(direc - deg_to_rad(180))
-	dir *= speed
-	bounce = boing
-
-func _physics_process(delta):
-	dir *= delta
+func do_the_moveing(dir, bounce):
 	var test = Vector2(0, 0)
 	velocity.z = dir.x
 	velocity.x = dir.y
@@ -23,6 +10,7 @@ func _physics_process(delta):
 	if collision:
 		if bounce:
 			if collision.get_collider().is_in_group("walls"):
+				move_and_collide(velocity.bounce(collision.get_normal()))
 				velocity = velocity.bounce(collision.get_normal())
 				print(velocity)
 				test.x = velocity.z

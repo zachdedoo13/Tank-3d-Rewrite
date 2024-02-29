@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Tank 3d Rewrite"
-run/main_scene="res://scenes/Test scene/Test.tscn"
+run/main_scene="res://Test scene/Test.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://A Requirements/assets/icon.svg"
 
@@ -25,6 +25,8 @@ RayTool="*res://A Requirements/Preload/RayTool.gd"
 
 window/size/viewport_width=1920
 window/size/viewport_height=800
+window/size/initial_position_type=2
+window/size/initial_screen=1
 window/vsync/vsync_mode=0
 
 [input]

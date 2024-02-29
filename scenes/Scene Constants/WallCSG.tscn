@@ -3,7 +3,7 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ihssr"]
 albedo_color = Color(0.0352941, 1, 1, 1)
 
-[node name="WallCsg" type="CSGBox3D"]
+[node name="WallCsg" type="CSGBox3D" groups=["walls"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 use_collision = true
 collision_layer = 3088
