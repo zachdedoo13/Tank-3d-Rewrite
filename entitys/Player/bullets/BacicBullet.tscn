@@ -3,18 +3,17 @@
 [ext_resource type="Script" path="res://entitys/Player/bullets/BacicBullet.gd" id="1_yp658"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rsspl"]
-size = Vector3(2.15375, 7.33734, 2.07562)
 
 [sub_resource type="BoxMesh" id="BoxMesh_a84np"]
 
-[node name="BacicBullet" type="CharacterBody3D"]
+[node name="BacicBullet" type="Node3D"]
 script = ExtResource("1_yp658")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27182, 0.632965, -0.215668)
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 shape = SubResource("BoxShape3D_rsspl")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 17.605, 0, 0, 0, 1, 0, 1, 0)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
 mesh = SubResource("BoxMesh_a84np")
-skeleton = NodePath("")
