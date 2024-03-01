@@ -28,6 +28,10 @@ window/size/viewport_width=1920
 window/size/viewport_height=800
 window/vsync/vsync_mode=0
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/anthonyec.camera_preview/plugin.cfg")
+
 [input]
 
 left_click={

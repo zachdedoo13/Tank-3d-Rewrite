@@ -3,10 +3,12 @@ extends CharacterBody3D
 @export var speed : int
 
 var clear = []
-var mouse_pos = Vector3(0,0,0)
+var mouse_pos = Vector3(0, 0, 0)
 
 func _ready():
 	SignalManager.MousePos.connect(get_mouse_pos)
+	SignalManager.BulletHit.connect(check_hit)
+	move_turrent()
 
 func get_mouse_pos(pos):
 	mouse_pos = Vector3(pos.x, $barrel.global_position.y, pos.z)
@@ -16,15 +18,20 @@ func move_turrent():
 	#RayTool.clear_check_direction(clear)
 	$barrel.look_at(mouse_pos)
 
+func check_hit(object):
+	if object == self:
+		print("hit")
+
 func _physics_process(delta):
-	
 	if Input.is_action_just_pressed("left_click"):
-		look_at(mouse_pos)
-		SignalManager.SpawnBullet.emit("bacic", "player", global_position, rotation.y, 30, false)
-		
+		move_turrent()
+		$barrel.shoot(mouse_pos)
+	
 	if Input.is_anything_pressed():
 		movement(delta)
 	move_turrent()
+	
+	
 
 func movement(delta):
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
