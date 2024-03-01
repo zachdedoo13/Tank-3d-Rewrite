@@ -17,6 +17,11 @@ func move_turrent():
 	$barrel.look_at(mouse_pos)
 
 func _physics_process(delta):
+	
+	if Input.is_action_just_pressed("left_click"):
+		look_at(mouse_pos)
+		SignalManager.SpawnBullet.emit("bacic", "player", global_position, rotation.y, 30, false)
+		
 	if Input.is_anything_pressed():
 		movement(delta)
 	move_turrent()
