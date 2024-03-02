@@ -1,10 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://dkgp8q7f1fkbk"]
+[gd_scene load_steps=9 format=3 uid="uid://dkgp8q7f1fkbk"]
 
 [ext_resource type="PackedScene" uid="uid://c3nivv52e0guv" path="res://scenes/Scene Constants/Floor.tscn" id="1_n8gvh"]
 [ext_resource type="PackedScene" uid="uid://c7itom7fb1a2u" path="res://scenes/Scene Constants/WallCSG.tscn" id="2_2l1rh"]
 [ext_resource type="PackedScene" uid="uid://c10yxasm25o0q" path="res://scenes/Scene Constants/MouseRaycst.tscn" id="3_f6vdj"]
 [ext_resource type="PackedScene" uid="uid://c2wcle7kc27hb" path="res://entitys/Player/Player.tscn" id="4_y4b6l"]
 [ext_resource type="PackedScene" uid="uid://sla0kyev4f88" path="res://entitys/Bullets/BulletManager.tscn" id="5_wx6pe"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_2w0l2"]
+
+[sub_resource type="Sky" id="Sky_yt1ao"]
+sky_material = SubResource("PhysicalSkyMaterial_2w0l2")
+
+[sub_resource type="Environment" id="Environment_1qi1n"]
+sky = SubResource("Sky_yt1ao")
+ambient_light_source = 3
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0812
+volumetric_fog_anisotropy = -0.11
+volumetric_fog_detail_spread = 6.0
+volumetric_fog_ambient_inject = 0.39
 
 [node name="Test" type="Node3D"]
 
@@ -57,3 +71,6 @@ size = Vector3(1, 1.5, 9)
 [node name="Player" parent="." instance=ExtResource("4_y4b6l")]
 
 [node name="BulletManager" parent="." instance=ExtResource("5_wx6pe")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1qi1n")

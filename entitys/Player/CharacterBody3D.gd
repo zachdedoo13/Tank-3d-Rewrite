@@ -6,6 +6,17 @@ extends CharacterBody3D
 
 var dir = Vector2(0, 0)
 
+func _ready() -> void:
+	SignalManager.BulletHit.connect(check_hit)
+
+func check_hit(object) -> void:
+	if object == self:
+		print("hit player")
+		HEALTH -= 1
+		print(HEALTH)
+		if HEALTH <= 0:
+			get_parent().get_parent().queue_free()
+
 func movement(delta) -> Vector2:
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var move = direction * SPEED * delta
@@ -16,7 +27,6 @@ func movement(delta) -> Vector2:
 
 func rotate_body(delta, direction:Vector2, rotate_speed) -> void:
 	var change_rotate = Vector2(-direction.y, -direction.x).angle()
-	print(rad_to_deg(change_rotate))
 	rotation.y = lerp(rotation.y, change_rotate, rotate_speed * delta)
 
 func _physics_process(delta) -> void:

@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://entitys/Player/CharacterBody3D.gd" id="1_nqxft"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kru7j"]
+size = Vector3(1, 3.38379, 1)
 
 [node name="Player" type="Node3D"]
 script = ExtResource("1_e5jek")
@@ -28,13 +29,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0404553, 0.208621, -1.71553
 [node name="Body" type="Node3D" parent="."]
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="Body"]
+collision_layer = 64
+collision_mask = 0
 script = ExtResource("1_nqxft")
 SPEED = 10.0
+HEALTH = 3
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Body/CharacterBody3D"]
 transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0, 0)
 mesh = ExtResource("1_7iigl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body/CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.63579, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.821826, 0)
 shape = SubResource("BoxShape3D_kru7j")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://by1w0bew0bi4l"]
+[gd_scene load_steps=5 format=3 uid="uid://by1w0bew0bi4l"]
 
 [ext_resource type="Script" path="res://entitys/Bullets/types/BacicBullet.gd" id="1_rvd6m"]
 
@@ -6,6 +6,11 @@
 size = Vector3(1, 9.95886, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_5ql7q"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wr7qy"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 8.08
 
 [node name="BacicBullet" type="CharacterBody3D"]
 collision_layer = 0
@@ -19,3 +24,4 @@ shape = SubResource("BoxShape3D_o7o8h")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.335, 0, 0, 0, 0.335, 0, 0, 0, 0.335, 0, 0, 0)
 mesh = SubResource("BoxMesh_5ql7q")
+surface_material_override/0 = SubResource("StandardMaterial3D_wr7qy")
