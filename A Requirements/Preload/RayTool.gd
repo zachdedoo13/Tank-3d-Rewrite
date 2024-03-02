@@ -1,13 +1,17 @@
 extends Node
 
 # raycast in direction
-func check_direction(position:Vector3, direction:float, draw=true, collision_mask=2) -> Array:
-	var ret = [false, false, false, false]
+func check_direction(position:Vector3, direction:float, draw=true, collision_mask=2, debug_look_vector=null) -> Array:
+	var ret = [false, null, false, null, false, false]
 	
 	direction += PI
 	
+	var look_vector = null
 	var raycast := RayCast3D.new()
-	var look_vector = Vector2(cos(direction), sin(direction))
+	if debug_look_vector != null:
+		look_vector = debug_look_vector
+	else:
+		look_vector = Vector2(cos(direction), sin(direction))
 	var target = Vector3(look_vector.y, 0, look_vector.x)
 	
 	raycast.enabled = true
@@ -15,7 +19,8 @@ func check_direction(position:Vector3, direction:float, draw=true, collision_mas
 	raycast.target_position = target * 1_000
 	raycast.target_position.y = position.y
 	raycast.collide_with_areas = true
-	raycast.collision_mask = collision_mask
+	raycast.set_collision_mask_value(1, false)
+	raycast.set_collision_mask_value(collision_mask, true)
 	
 	get_tree().get_root().add_child(raycast)
 	raycast.force_raycast_update()
@@ -24,6 +29,7 @@ func check_direction(position:Vector3, direction:float, draw=true, collision_mas
 		ret[0] = true
 		ret[1] = raycast.get_collider()
 		ret[2] = raycast.get_collision_point()
+		ret[4] = raycast.get_collision_normal()
 		
 	raycast.queue_free()
 		
@@ -35,11 +41,15 @@ func check_direction(position:Vector3, direction:float, draw=true, collision_mas
 			line = Draw3d.line(raycast.position, raycast.target_position)
 		ret[3] = line
 		
+		ret[5] = look_vector
 	return ret
 
 func clear_check_direction(ret:Array, on_screen=1) -> Array:
 	if len(ret) > on_screen:
-		ret[0].queue_free()
+		if ret[0] != null:
+			ret[0].queue_free()
+		else:
+			print("saved at queue_free")
 		ret.remove_at(0)
 	return ret
 
@@ -58,7 +68,8 @@ func check_direction_bounce(position:Vector3, direction:float, draw=true, collis
 	raycast.target_position = target * 1_000
 	raycast.target_position.y = position.y
 	raycast.collide_with_areas = true
-	raycast.collision_mask = collision_mask
+	raycast.set_collision_mask_value(1, false)
+	raycast.set_collision_mask_value(collision_mask, true)
 	
 	get_tree().get_root().add_child(raycast)
 	raycast.force_raycast_update()
@@ -82,7 +93,8 @@ func check_direction_bounce(position:Vector3, direction:float, draw=true, collis
 	bounceRaycast.position = raycast.get_collision_point()
 	bounceRaycast.target_position = bounceTarget * 1_000
 	bounceRaycast.collide_with_areas = true
-	bounceRaycast.collision_mask = collision_mask
+	raycast.set_collision_mask_value(1, false)
+	raycast.set_collision_mask_value(collision_mask, true)
 	
 	get_tree().get_root().add_child(bounceRaycast)
 	bounceRaycast.force_raycast_update()
@@ -101,4 +113,26 @@ func check_direction_bounce(position:Vector3, direction:float, draw=true, collis
 	
 	return ret
 
+func new_check_direction_bounce(position:Vector3, direction:float, draw=true, collision_mask=2) -> Array:
+	# is collideing | collider | collision point | line1 | line2 |
+	var ret = [false, null, false, null, null]
+	
+	var first_ray = check_direction(position, direction, draw, collision_mask)
+	
+	# bounce
+	if first_ray[0]:
+		var bouceNormal = Vector2(first_ray[4].z, first_ray[4].x)
+		var bounce_look_vector = first_ray[5].bounce(bouceNormal)
+		
+		var second_ray = check_direction(first_ray[2], direction, draw, collision_mask, bounce_look_vector)
+		
+		if second_ray[0]:
+			ret[0] = true
+			ret[1] = second_ray[1]
+			ret[2] = second_ray[2]
+			ret[3] = second_ray[3]
+	
+	ret[4] = first_ray[3]
+	
+	return ret
 # sup

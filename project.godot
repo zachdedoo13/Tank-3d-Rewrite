@@ -24,8 +24,9 @@ Tools="*res://A Requirements/Preload/Tools.gd"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=800
+window/size/viewport_width=3840
+window/size/viewport_height=2160
+window/size/mode=3
 window/vsync/vsync_mode=0
 
 [editor_plugins]

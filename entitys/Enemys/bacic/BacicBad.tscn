@@ -1,19 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://c2wcle7kc27hb"]
+[gd_scene load_steps=6 format=3 uid="uid://d165hum8smkoh"]
 
-[ext_resource type="ArrayMesh" uid="uid://uk6f71lbi1ke" path="res://A Requirements/assets/Tank.obj" id="1_7iigl"]
-[ext_resource type="Script" path="res://entitys/Player/Player.gd" id="1_e5jek"]
-[ext_resource type="Script" path="res://entitys/Player/Turrent.gd" id="1_nc356"]
-[ext_resource type="Script" path="res://entitys/Player/CharacterBody3D.gd" id="1_nqxft"]
+[ext_resource type="Script" path="res://entitys/Enemys/bacic/BacicBad.gd" id="1_ryf1e"]
+[ext_resource type="Script" path="res://entitys/Enemys/bacic/Turrent.gd" id="2_j4kyw"]
+[ext_resource type="ArrayMesh" uid="uid://uk6f71lbi1ke" path="res://A Requirements/assets/Tank.obj" id="3_8muhq"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_kru7j"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_itpb2"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_as3c3"]
 size = Vector3(1, 3.38379, 1)
 
-[node name="Player" type="Node3D"]
-script = ExtResource("1_e5jek")
+[node name="BacicBad" type="Node3D"]
+script = ExtResource("1_ryf1e")
 
 [node name="Turrent" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06112, 0)
-script = ExtResource("1_nc356")
+script = ExtResource("2_j4kyw")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Turrent"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0340576, 0.131737, -0.813828)
@@ -26,19 +28,21 @@ size = Vector3(0.001, 1, 0.191895)
 [node name="Marker3D" type="Marker3D" parent="Turrent"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0404553, 0.208621, -1.71553)
 
+[node name="Timer" type="Timer" parent="Turrent"]
+
 [node name="Body" type="Node3D" parent="."]
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="Body" groups=["player"]]
+[node name="CharacterBody3D" type="CharacterBody3D" parent="Body"]
 collision_layer = 64
 collision_mask = 16
-script = ExtResource("1_nqxft")
-SPEED = 30.0
-HEALTH = 3
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Body/CharacterBody3D"]
 transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0, 0)
-mesh = ExtResource("1_7iigl")
+mesh = ExtResource("3_8muhq")
+surface_material_override/0 = SubResource("StandardMaterial3D_itpb2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body/CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.821826, 0)
-shape = SubResource("BoxShape3D_kru7j")
+shape = SubResource("BoxShape3D_as3c3")
+
+[connection signal="timeout" from="Turrent/Timer" to="Turrent" method="_on_timer_timeout"]

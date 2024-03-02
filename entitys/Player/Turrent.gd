@@ -15,3 +15,4 @@ func _process(delta) -> void:
 
 func shoot() -> void:
 	SignalManager.SpawnBullet.emit("bacic", "player", $Marker3D.global_position, rotation.y - PI, 30, false)
+

@@ -17,20 +17,20 @@ func check_hit(object) -> void:
 		if HEALTH <= 0:
 			get_parent().get_parent().queue_free()
 
-func movement(delta) -> Vector2:
+func movement(delta) -> void:
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var move = direction * SPEED * delta
 	position += Vector3(move.x, 0, move.y)
 	move_and_slide()
 	
-	return direction
+	rotate_body(delta, direction, 10)
 
 func rotate_body(delta, direction:Vector2, rotate_speed) -> void:
 	var change_rotate = Vector2(-direction.y, -direction.x).angle()
-	rotation.y = lerp(rotation.y, change_rotate, rotate_speed * delta)
+	rotation.y = change_rotate
 
 func _physics_process(delta) -> void:
-
-	dir = movement(delta)
 	
-	rotate_body(delta, dir, 10)
+	if Input.get_vector("move_left", "move_right", "move_up", "move_down") != Vector2(0, 0):
+		movement(delta)
+

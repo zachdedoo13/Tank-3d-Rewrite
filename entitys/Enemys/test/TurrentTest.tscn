@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://1ethxxv7qngi"]
 
-[ext_resource type="Script" path="res://entitys/Enemys/TurrentTest.gd" id="1_va08v"]
+[ext_resource type="Script" path="res://entitys/Enemys/test/TurrentTest.gd" id="1_va08v"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g4von"]
 albedo_color = Color(0, 0, 0, 1)
