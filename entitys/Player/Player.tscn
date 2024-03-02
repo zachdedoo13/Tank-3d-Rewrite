@@ -1,46 +1,40 @@
-[gd_scene load_steps=7 format=3 uid="uid://byoleqjytixsb"]
+[gd_scene load_steps=6 format=3 uid="uid://c2wcle7kc27hb"]
 
 [ext_resource type="ArrayMesh" uid="uid://uk6f71lbi1ke" path="res://A Requirements/assets/Tank.obj" id="1_7iigl"]
+[ext_resource type="Script" path="res://entitys/Player/Player.gd" id="1_e5jek"]
+[ext_resource type="Script" path="res://entitys/Player/Turrent.gd" id="1_nc356"]
 [ext_resource type="Script" path="res://entitys/Player/CharacterBody3D.gd" id="1_nqxft"]
-[ext_resource type="Script" path="res://entitys/Player/barrel.gd" id="3_3psdj"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pn2uo"]
-albedo_color = Color(1, 1, 0, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_kw2ko"]
-size = Vector3(1, 1.87183, 0.772205)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c7yjx"]
-albedo_color = Color(1, 0, 1, 1)
-rim_enabled = true
+[sub_resource type="BoxShape3D" id="BoxShape3D_kru7j"]
 
 [node name="Player" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_e5jek")
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-collision_layer = 64
-collision_mask = 0
+[node name="Turrent" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06112, 0)
+script = ExtResource("1_nc356")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Turrent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0340576, 0.131737, -0.813828)
+size = Vector3(0.324951, 0.204971, 2.03478)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Turrent"]
+transform = Transform3D(0.0823212, 0, 0.996606, 0, 1, 0, -0.996606, 0, 0.0823212, 0.041707, 0.121706, -1.71546)
+size = Vector3(0.001, 1, 0.191895)
+
+[node name="Marker3D" type="Marker3D" parent="Turrent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0404553, 0.208621, -1.71553)
+
+[node name="Body" type="Node3D" parent="."]
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="Body"]
 script = ExtResource("1_nqxft")
-speed = 10
+SPEED = 10.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
-transform = Transform3D(0.22, 0, 0, 0, 0.06, 0, 0, 0, 0.107, 0, -1, 0)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Body/CharacterBody3D"]
+transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0, 0)
 mesh = ExtResource("1_7iigl")
-surface_material_override/0 = SubResource("StandardMaterial3D_pn2uo")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.06189, 0.067266)
-shape = SubResource("BoxShape3D_kw2ko")
-
-[node name="barrel" type="CSGBox3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00921631, 0.110961, 0.0123901)
-size = Vector3(0.709106, 0.387207, 0.597046)
-script = ExtResource("3_3psdj")
-
-[node name="CSGBox3D" type="CSGBox3D" parent="CharacterBody3D/barrel"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.041626, 0.0141809, -0.644531)
-size = Vector3(0.304443, 0.3573, 2.28906)
-material = SubResource("StandardMaterial3D_c7yjx")
-
-[node name="Marker3D" type="Marker3D" parent="CharacterBody3D/barrel"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.22782)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.63579, 0)
+shape = SubResource("BoxShape3D_kru7j")
