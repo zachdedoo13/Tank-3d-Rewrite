@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://d165hum8smkoh"]
+[gd_scene load_steps=7 format=3 uid="uid://d165hum8smkoh"]
 
 [ext_resource type="Script" path="res://entitys/Enemys/bacic/BacicBad.gd" id="1_ryf1e"]
 [ext_resource type="Script" path="res://entitys/Enemys/bacic/Turrent.gd" id="2_j4kyw"]
 [ext_resource type="ArrayMesh" uid="uid://uk6f71lbi1ke" path="res://A Requirements/assets/Tank.obj" id="3_8muhq"]
+[ext_resource type="Script" path="res://entitys/Enemys/bacic/CharacterBody3D.gd" id="3_tuq0d"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_itpb2"]
 albedo_color = Color(1, 0, 0, 1)
@@ -35,6 +36,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0404553, 0.208621, -1.71553
 [node name="CharacterBody3D" type="CharacterBody3D" parent="Body"]
 collision_layer = 64
 collision_mask = 16
+script = ExtResource("3_tuq0d")
+HEALTH = 1
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Body/CharacterBody3D"]
 transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0, 0)
